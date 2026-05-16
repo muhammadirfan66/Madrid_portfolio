@@ -1,0 +1,624 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* ==============================
+   CSS VARIABLES
+============================== */
+:root {
+  --primary: #4070f4;
+  --primary-dark: #265df2;
+  --primary-light: #eef2ff;
+  --text-dark: #1e2a3a;
+  --text-mid: #4b5563;
+  --text-light: #9ca3af;
+  --bg: #f0f4ff;
+  --white: #ffffff;
+  --card-radius: 24px;
+  --shadow: 0 8px 30px rgba(64, 112, 244, 0.12);
+  --shadow-hover: 0 20px 50px rgba(64, 112, 244, 0.28);
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==============================
+   RESET & BASE
+============================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-dark);
+  min-height: 100vh;
+  /* FLEXBOX: layout halaman vertikal */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ==============================
+   HEADER — FLEXBOX
+============================== */
+.site-header {
+  background: var(--white);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  /* FLEXBOX: logo kiri, nav kanan */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: -0.5px;
+}
+
+.logo-real {
+  color: var(--white);
+  background: var(--primary);
+  padding: 0 6px;
+  border-radius: 6px;
+  font-style: italic;
+  margin-right: 2px;
+}
+
+.nav-links {
+  /* FLEXBOX: item nav sejajar */
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  transition: color var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* ==============================
+   HERO — FLEXBOX
+============================== */
+.hero {
+  text-align: center;
+  padding: 64px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.hero-title span {
+  color: var(--primary);
+  position: relative;
+}
+
+.hero-title span::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+  opacity: 0.3;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  color: var(--text-light);
+  font-weight: 300;
+}
+
+/* ==============================
+   SWIPER SECTION
+============================== */
+.swiper-section {
+  flex: 1;
+  padding: 20px 0 80px;
+  width: 100%;
+}
+
+.slide-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 60px 60px;
+  overflow: hidden;
+}
+
+/* ==============================
+   CARD — FLEXBOX
+============================== */
+.card {
+  width: 100%;
+  border-radius: var(--card-radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  /* FLEXBOX: konten card secara kolom */
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+/* ——— HOVER EFFECTS ——— */
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+}
+
+.card:hover .overlay {
+  background: var(--primary-dark);
+}
+
+.card:hover .overlay::after {
+  box-shadow: 6px -6px 0 6px var(--primary-dark);
+}
+
+.card:hover .card-img {
+  transform: scale(1.08);
+  border-color: var(--primary-dark);
+}
+
+.card:hover .button {
+  background: var(--primary-dark);
+  letter-spacing: 0.5px;
+}
+
+.card:hover .name {
+  color: var(--primary);
+}
+
+/* ==============================
+   CARD IMAGE
+============================== */
+.image-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0 0;
+  row-gap: 5px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--primary);
+  border-radius: var(--card-radius) var(--card-radius) 0 var(--card-radius);
+  transition: background var(--transition);
+}
+
+.overlay::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  height: 40px;
+  width: 40px;
+  background: var(--white);
+  border-radius: 0 var(--card-radius) 0 0;
+  box-shadow: 6px -6px 0 6px var(--primary);
+}
+
+.card-image {
+  position: relative;
+  z-index: 1;
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+  background: var(--white);
+  padding: 4px;
+  margin-bottom: 10px;
+}
+
+.card-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--primary);
+  transition:
+    transform var(--transition),
+    border-color var(--transition);
+}
+
+/* ==============================
+   CARD CONTENT — FLEXBOX
+============================== */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 18px 24px;
+  gap: 6px;
+  flex: 1;
+}
+
+.name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  transition: color var(--transition);
+}
+
+.role {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.description {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  text-align: center;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+/* Social links — FLEXBOX */
+.social-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.social-btn {
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  border: 1.5px solid #e5e7eb;
+  padding: 3px 10px;
+  border-radius: 8px;
+  transition: all var(--transition);
+}
+
+.social-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+.button {
+  margin-top: 10px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--white);
+  padding: 9px 24px;
+  background: var(--primary);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all var(--transition);
+  width: 100%;
+  max-width: 160px;
+}
+
+.button:hover {
+  background: var(--primary-dark);
+  transform: scale(1.04);
+}
+
+/* ==============================
+   SWIPER CONTROLS
+============================== */
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--primary);
+  background: var(--white);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: all var(--transition);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.swiper-pagination-bullet {
+  background: var(--primary);
+  opacity: 0.3;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+/* ==============================
+   FOOTER
+============================== */
+.site-footer {
+  text-align: center;
+  padding: 20px 24px;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  background: var(--white);
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+/* Mobile kecil */
+@media (max-width: 480px) {
+  .slide-container {
+    padding: 16px 40px 60px;
+  }
+  .hero {
+    padding: 40px 16px 24px;
+  }
+  .nav-links {
+    gap: 16px;
+  }
+  .card-image {
+    height: 110px;
+    width: 110px;
+  }
+  .nav-links a {
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 480px) and (max-width: 768px) {
+  .slide-container {
+    padding: 16px 48px 60px;
+  }
+}
+
+/* Sembunyikan nav di layar sangat kecil */
+@media (max-width: 360px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+/* ==============================
+   HERO SPLIT
+============================== */
+.hero-split {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #f5f3f0;
+}
+
+.hero-slide {
+  display: flex !important;
+  height: 520px;
+}
+
+/* Kiri: foto */
+.hero-split-img {
+  flex: 0 0 50%;
+  width: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-split-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.swiper-slide-active .hero-split-img img {
+  transform: scale(1.03);
+}
+
+/* Kanan: teks */
+.hero-split-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 48px 64px;
+  gap: 16px;
+  background: #faf9f7;
+}
+
+.hst-name {
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+.hst-desc {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.75;
+  font-weight: 400;
+  max-width: 360px;
+}
+
+.hst-meta {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #999;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Nav tombol hero */
+.hero-btn-prev,
+.hero-btn-next {
+  color: #111;
+  background: rgba(255, 255, 255, 0.8);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
+}
+
+.hero-btn-prev::after,
+.hero-btn-next::after {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hero-btn-prev:hover,
+.hero-btn-next:hover {
+  background: #fff;
+  color: var(--primary);
+}
+
+/* Pagination */
+.hero-pagination {
+  bottom: 16px !important;
+  left: auto !important;
+  right: 0 !important;
+  width: 50% !important;
+  text-align: center;
+}
+
+.hero-pagination .swiper-pagination-bullet {
+  background: #bbb;
+  opacity: 1;
+  width: 6px;
+  height: 6px;
+}
+
+.hero-pagination .swiper-pagination-bullet-active {
+  background: var(--primary);
+  width: 20px;
+  border-radius: 3px;
+}
+
+/* Section label */
+.section-label {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 60px 0;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.section-label h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.section-label p {
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+/* Responsive hero split */
+@media (max-width: 768px) {
+  .hero-slide {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .hero-split-img {
+    flex: none;
+    width: 100%;
+    height: 280px;
+  }
+
+  .hero-split-text {
+    padding: 32px 24px;
+  }
+
+  .hero-pagination {
+    width: 100% !important;
+    left: 0 !important;
+  }
+
+  .section-label {
+    padding: 24px 24px 0;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-split-img {
+    height: 220px;
+  }
+
+  .hst-name {
+    font-size: 1.8rem;
+  }
+
+  .hero-split-text {
+    padding: 24px 20px;
+    gap: 10px;
+  }
+}
